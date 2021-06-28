@@ -2,11 +2,9 @@
 
 ### Contact/Information
 
-###### Written & Created by Matthew Rapp.
-
-###### CSE 212 Final Project
-
-###### rap16006@byui.edu
+- Written & Created by Matthew Rapp.
+- CSE 212 Final Project
+- rap16006@byui.edu
 
 By the end of this tutorial, you should have a basic underderstadning of:
 
