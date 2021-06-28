@@ -1,10 +1,6 @@
 # Data Structures Tutorial
 
-### Contact/Information
-
-- Written & Created by Matthew Rapp.
-- CSE 212 Final Project
-- rap16006@byui.edu
+<hr />
 
 By the end of this tutorial, you should have a basic underderstadning of:
 
@@ -16,4 +12,14 @@ Sections are based in the order above. Each Section will contain an introduction
 
 ### Resources
 
+<hr />
+
 - Resources will be listed here.
+
+### Contact/Information
+
+<hr />
+
+- Written & Created by Matthew Rapp.
+- CSE 212 Final Project
+- rap16006@byui.edu
