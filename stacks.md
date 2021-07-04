@@ -271,7 +271,7 @@ todos.next_task()
 print('===============')
 ```
 
-You can check your answer with the solution here: (stack-problem.py)
+You can check your answer with the solution here: [Solution](stack-problem.py)
 
 ## Resources
 
