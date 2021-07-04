@@ -36,7 +36,9 @@ A Stack in Python is represented using a list.
 
 <hr style='border-width: .5px; padding-top: 10px; padding-bottom: 5px;' />
 
-## Code Example of a Stack in Python
+## Coding Examples
+
+### **Code Example of a Stack in Python**
 
 ```python
 # Python code to help demonstrate the basics of a stack
@@ -76,6 +78,200 @@ if len(stack) == 0:
 else:
     print(False)  # Output: True
 ```
+
+### **Program Example of a Stack in Python**
+
+```python
+'''
+    This simple program will keep track of your
+    Tasks/Todos in a LIFO (Last In First Out) order.
+
+    Although, todo list tend to work in a really any order,
+    I found this program nice to help understand how a Stack
+    could be implemented.
+
+    Program written by Matthew Rapp.
+'''
+
+
+class Tasks:
+    def __init__(self):
+        self.tasks = []
+
+    # add_task method allows you to add a
+    # task to the front of the list
+    def add_task(self, task):
+        # if the task is already in the stack, return False
+        if task in self.tasks:
+            return False
+
+        # if the task is not in the stack, add the task
+        self.tasks.append(task)
+        return True
+
+    # remove_current_task method allows you to remove
+    # the current task when finished or not needed
+    def remove_current_task(self):
+        # if there is no tasks in the task stack, just return
+        if len(self.tasks) <= 0:
+            return
+
+        # if there is a task in the stack, pop off the current task
+        return self.tasks.pop()
+
+    # next_task method allows you to see what is
+    # next to do, in order of priority
+    def next_task(self):
+        print(self.tasks[-1])
+        return
+
+
+todos = Tasks()
+todos.add_task('yo yo')
+todos.add_task('need clothes')
+todos.next_task()  # Output: need clothes
+todos.add_task('drive to grocery store')
+todos.next_task()  # Output: drive to grocery store
+todos.remove_current_task()
+todos.add_task('get ice cream')
+todos.remove_current_task()
+todos.remove_current_task()
+todos.next_task()  # Output: yo yo
+```
+
+## Problem To Solve
+
+For this problem, we will expand on the example program written above. The requirements for this problem include:
+
+1. A _reverse_ method within the class to reverse the tasks, just if someone wanted to view the tasks in order they were written in.
+1. A _see_all_tasks_ method within the class if the user wants to see all the tasks left to do.
+1. An _is_empty_ method that will return True or False depending on if there are more tasks within the todo list.
+1. An _undo_ method that allows the user to undo the last action that was executed. HINT: you will want the user to be able to undo anything that has been done within the program, meaning more than just one undo.
+
+Be sure to leave relavent, concise comments throughout the code you write. It's good practice and will benefit you in the future when referencing back on old code or if someone wanted to look over your code.
+
+Code to start out with (feel free to copy and paste into your own file):
+
+```python
+class TodoList:
+    def __init__(self):
+        self.tasks = []
+        self.history = []
+
+    # add_task method allows you to add a task to the front of the list
+    def add_task(self, task):
+        # if the task is already in the stack, return False
+        if task in self.tasks:
+            return False
+
+        self.oldList = self.tasks.copy()
+        # if the task is not in the stack, add the task
+        self.tasks.append(('add', task))
+        return True
+
+    # remove_current_task method allows you to remove the current task when finished or not needed
+    def remove_current_task(self):
+        # if there is no tasks in the task stack, just return
+        if len(self.tasks) <= 0:
+            return
+        # if there is a task in the stack, pop off the current task
+        taskToDelete = self.tasks.pop()
+        # add that task to the history
+        self.history.append(('remove', taskToDelete[1]))
+        # delete that task from memory
+        del taskToDelete
+        return
+
+    # next_task method allows you to see what is next to do, in order of priority
+    def next_task(self):
+        print(self.tasks[-1])
+        return
+
+    #####################
+    # Problem #1
+    #####################
+    def reverse(self):
+        ''' Your code goes here '''
+        pass
+
+    #####################
+    # Problem #2
+    #####################
+    def see_all_tasks(self):
+        ''' Your code goes here '''
+        pass
+
+    #####################
+    # Problem #3
+    #####################
+    def is_empty(self):
+        ''' Your code goes here '''
+        pass
+
+    #####################
+    # Problem #4
+    #####################
+    def undo(self):
+        ''' Your code goes here '''
+        pass
+
+
+todos = TodoList()
+todos.add_task('yo yo')
+todos.add_task('need clothes')
+todos.add_task('drive to grocery store')
+todos.next_task()  # Output: drive to grocery store
+print('===============')
+todos.remove_current_task()
+
+##################
+### Problem #1 ###
+##################
+todos.reverse()  # Output: ['yo yo', 'need clothes']
+print('===============')
+##################
+##################
+##################
+todos.add_task('need buttermilk')
+todos.add_task('catch a pokemon')
+todos.add_task('watch movie')
+##################
+### Problem #2 ###
+##################
+# Output: ['watch movie', 'catch a pokemon', 'need buttermilk', 'need clothes', 'yo yo']
+todos.see_all_tasks()
+print('===============')
+##################
+##################
+##################
+todos.remove_current_task()
+todos.remove_current_task()
+##################
+### Problem #3 ###
+##################
+todos.is_empty()  # Output: False
+print('===============')
+##################
+##################
+##################
+todos.next_task()  # Output: need buttermilk
+todos.add_task('superbowl party')
+print('===============')
+##################
+### Problem #4 ###
+##################
+todos.next_task()  # Output: superbowl party
+todos.see_all_tasks()
+todos.undo()
+todos.see_all_tasks()
+todos.next_task()  # Output: need buttermilk
+print('===============')
+todos.undo()
+todos.next_task()
+print('===============')
+```
+
+You can check your answer with the solution here: (stack-problem.py)
 
 ## Resources
 
