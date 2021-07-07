@@ -21,7 +21,8 @@ class TodoList:
         if task in self.tasks:
             return False
 
-        self.oldList = self.tasks.copy()
+        # add that task to the history
+        self.history.append(('add', task))
         # if the task is not in the stack, add the task
         self.tasks.append(('add', task))
         return True
@@ -35,13 +36,11 @@ class TodoList:
         taskToDelete = self.tasks.pop()
         # add that task to the history
         self.history.append(('remove', taskToDelete[1]))
-        # delete that task from memory
-        del taskToDelete
         return
 
     # next_task method allows you to see what is next to do, in order of priority
     def next_task(self):
-        print(self.tasks[-1])
+        print(self.tasks[-1][1])
         return
 
     #####################
@@ -49,18 +48,26 @@ class TodoList:
     #####################
     # reverse method allows you to reverse the task list to view all the tasks from oldest to newest
     def reverse(self):
-        print(self.tasks)
+        # create an empty list to help style the output
+        valuesToPrint = []
+        for tuple in self.tasks:
+            # append each value of the tuple to the list
+            valuesToPrint.append(tuple[1])
+        # print the values
+        print(valuesToPrint)
 
     #####################
     # Problem #2
     #####################
     # see_all_tasks method allows you to look at what is todo within the whole stack
     def see_all_tasks(self):
+        # create an empty list to help style the output
         valuesToPrint = []
         for tuple in self.tasks[::-1]:
+            # append each value of the tuple to the list
             valuesToPrint.append(tuple[1])
+        # print the values
         print(valuesToPrint)
-        return
 
     #####################
     # Problem #3
@@ -78,17 +85,20 @@ class TodoList:
     #####################
     # undo method allows you to undo your latest action
     def undo(self):
-        lastTupleAction = self.history[0][0]
-        tupleValue = self.history[0][1]
-        # print('lsdjkf: ', self.tasks, 'fjkdas: ', self.history)
+        # take from the back of the list and get the key of the tuple
+        lastTupleAction = self.history[-1][0]
+        # if the key === 'add'
         if lastTupleAction == 'add':
-            itemToUndo = self.tasks.pop()
-            # self.history.append(itemToUndo)
-            del itemToUndo
+            # delete that node from the task list
+            self.tasks.pop()
+            # delete that node from the history list
+            self.history.pop()
+        # if the key === 'remove'
         elif lastTupleAction == 'remove':
+            # delete that node from the history list
             itemToUndo = self.history.pop()
+            # add that node back to the task list
             self.tasks.append(itemToUndo)
-            del itemToUndo
 
 
 todos = TodoList()
@@ -136,26 +146,12 @@ print('===============')
 ### Problem #4 ###
 ##################
 todos.next_task()  # Output: superbowl party
+# Output: ['superbowl party', 'need buttermilk', 'need clothes', 'yo yo']
 todos.see_all_tasks()
 todos.undo()
-todos.see_all_tasks()
 todos.next_task()  # Output: need buttermilk
 print('===============')
 todos.undo()
-todos.next_task()
+# Output: ['catch a pokemon', 'need buttermilk', 'need clothes', 'yo yo']
+todos.see_all_tasks()
 print('===============')
-
-# todos.add_task('#1')
-# todos.add_task('#2')
-# todos.see_all_tasks()  # Output: [#2, #1]
-# todos.remove_current_task()
-# todos.see_all_tasks()  # Output: [#1]
-# todos.undo()
-# todos.see_all_tasks()  # Output: [#2, #1]
-# todos.add_task('#3')
-# todos.add_task('#4')
-# todos.see_all_tasks()  # Output: ['#4', '#3', '#2', '#1']
-# todos.remove_current_task()
-# todos.see_all_tasks()  # Output: ['#3', '#2', '#1']
-# todos.undo()
-# todos.see_all_tasks()  # Output: ['#4', '#3', '#2', '#1']

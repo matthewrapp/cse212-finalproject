@@ -164,7 +164,8 @@ class TodoList:
         if task in self.tasks:
             return False
 
-        self.oldList = self.tasks.copy()
+        # add that task to the history
+        self.history.append(('add', task))
         # if the task is not in the stack, add the task
         self.tasks.append(('add', task))
         return True
@@ -178,13 +179,11 @@ class TodoList:
         taskToDelete = self.tasks.pop()
         # add that task to the history
         self.history.append(('remove', taskToDelete[1]))
-        # delete that task from memory
-        del taskToDelete
         return
 
     # next_task method allows you to see what is next to do, in order of priority
     def next_task(self):
-        print(self.tasks[-1])
+        print(self.tasks[-1][1])
         return
 
     #####################
@@ -261,13 +260,14 @@ print('===============')
 ### Problem #4 ###
 ##################
 todos.next_task()  # Output: superbowl party
+# Output: ['superbowl party', 'need buttermilk', 'need clothes', 'yo yo']
 todos.see_all_tasks()
 todos.undo()
-todos.see_all_tasks()
 todos.next_task()  # Output: need buttermilk
 print('===============')
 todos.undo()
-todos.next_task()
+# Output: ['catch a pokemon', 'need buttermilk', 'need clothes', 'yo yo']
+todos.see_all_tasks()
 print('===============')
 ```
 
