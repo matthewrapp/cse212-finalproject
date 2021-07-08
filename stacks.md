@@ -82,18 +82,6 @@ else:
 ### **Program Example of a Stack in Python**
 
 ```python
-'''
-    This simple program will keep track of your
-    Tasks/Todos in a LIFO (Last In First Out) order.
-
-    Although, todo list tend to work in a really any order,
-    I found this program nice to help understand how a Stack
-    could be implemented.
-
-    Program written by Matthew Rapp.
-'''
-
-
 class Tasks:
     def __init__(self):
         self.tasks = []
