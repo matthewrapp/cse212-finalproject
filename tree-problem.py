@@ -79,10 +79,12 @@ class BST:
     ##################
 
     def _get_min(self, root):
-        # implement your code here
+        # set current the the root/node being passed in
         current = root
+        # if the current.left child exists, recurse with the left child as the root/node
         if current.left is not None:
             current = self._get_min(current.left)
+        # return the min value
         return current
 
     ##################
@@ -100,10 +102,12 @@ class BST:
     ##################
 
     def _get_max(self, root):
-        # implement your code here
+        # set current the the root/node being passed in
         current = root
+        # if the current.right child exists, recurse with the right child as the root/node
         if current.right is not None:
             current = self._get_max(current.right)
+        # return the max value
         return current
 
     ##################
@@ -121,47 +125,47 @@ class BST:
     ##################
 
     def _delete(self, data, root):
-        # implement your code here
-        # print('first print: ', data, root.data)
+        # if data being passed in is less than it's root (left side)
         if data < root.data:
-            # print('data < root.data: ', data, root.data,
-            #       root.left.data, root.right.data)
+            # if the left child doesn't exists, return False
             if root.left is None:
                 return False
+            # otherwise, recurse with the left side
             else:
                 return self._delete(data, root.left)
+        # if data being passed in is greater than it's root (right side)
         elif data > root.data:
-            # print('data > root.data: ', data, root.data,
-            #       root.left.data, root.right.data)
+            # if the right child doesn't exists, return False
             if root.right is None:
                 return False
+            # otherwise, recurse with the right side
             else:
                 return self._delete(data, root.right)
+        # if data being passed in is equal than it's root
+        # this is the node to be deleted
         else:
-            # print('data == root.data: ', data,
-            #       root.data, root.left, root.right)
-            # this is the node to be deleted
             if root.left is None:
-                # print('root.left == None: ', data,
-                #       root.data, root.left, root.right)
-
+                # set temperary variable to the right side
                 temp = root.right
+                # set the root to None
                 root = None
+                # return the temperary variable
                 return temp
 
             elif root.right is None:
-                # print('root.right == None: ', data,
-                #       root.data, root.left, root.right)
+                # set temperary variable to the left side
                 temp = root.left
+                # set the root to None
                 root = None
+                # return the temperary variable
                 return temp
 
-            # print('root.left != None && root.right != None: ', data, root)
-            # if there is still a left and right child to the node being deleted, take the minimum value in the right subtree and make that the root
+            # if there is still a left and right child to the node being deleted,
+            # take the minimum value in the right subtree and make that the root
             temp = self._get_min(root.right)
+            print(temp.data)
             root.data = temp.data
             # delete the node successor
-            print('here: ', temp.data, root.right)
             root.right = self._delete(temp.data, root.right)
 
         return root
@@ -202,6 +206,7 @@ class BST:
 
     def _traverse_forward(self, root):
         # print out data, from smallest to largest
+        # if the root is not equal to None
         if root is not None:
             yield from self._traverse_forward(root.left)
             yield root.data
@@ -217,8 +222,12 @@ class BST:
     ##################
 
     def _traverse_backward(self, root):
-        # implement your code here
-        pass
+        # print out data, from largest to smallest
+        # if the root is not equal to None
+        if root is not None:
+            yield from self._traverse_backward(root.right)
+            yield root.data
+            yield from self._traverse_backward(root.left)
 
     ##################
     ##################
@@ -226,20 +235,23 @@ class BST:
 
 
 # create an tree instance
-numbers = [3, 25, 1]
+numbers = [3, 25, 1, 20]
 tree = BST()
 for num in numbers:
     tree.insert(num)
-# for node in tree:
-#     print(node)  # Output: 1, 3, 25
-# tree.exists(22)  # Output: False
-# tree.exists(25)  # Output: True
-
-### Problem #1 ###
-tree.delete(1)
 print('')
 for node in tree:
-    print(node)  # Output: 3, 25
+    print(node)  # Output: 1, 3, 20, 25
+print('_______________\n')
+tree.exists(22)  # Output: False
+print('_______________\n')
+tree.exists(25)  # Output: True
+print('_______________\n')
+
+### Problem #1 ###
+tree.delete(3)
+for node in tree:
+    print(node)  # Output: 1, 20, 25
 print('_______________\n')
 minNode = tree.get_min()
 print('Min Value: ', minNode.data)
@@ -250,3 +262,5 @@ print('_______________\n')
 th = tree.height()
 print('Tree Height: ', th)  # Output 2
 print('_______________\n')
+for node in reversed(tree):
+    print(node)  # Output: 25, 20, 1
