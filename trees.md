@@ -215,4 +215,4 @@ You can check your answer with the solution here: [Solution](tree-problem.py)
 - https://www.geeksforgeeks.org/binary-search-tree-data-structure/
 - https://dev.to/phuctm97/2-min-codecamp-binary-search-tree-and-real-world-applications-58cj
 - https://www.geeksforgeeks.org/applications-of-bst/
-- https://medium.com/@siddharthgupta555t/finally-understanding-recursion-and-binary-search-trees-857c85e72978#:~:text=It%20looks%20like%20a%20tree,in%20the%20tree%20as%20well.
+- https://medium.com/@siddharthgupta555t/finally-understanding-recursion-and-binary-search-trees-857c85e72978#:~:text=It%20looks%20like%20a%20tree,in%20the%20tree%20as%20well
