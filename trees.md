@@ -24,6 +24,39 @@
     - Image of a balanced BST:
     - ![Balanced BST](images/balancedBST-rep-1.png)
 
+### **Recursion**
+
+- What is Recursion?
+  - The process of the function calling itself directly or indirectly.
+  - Very important to use within a BST program.
+  - Think of recursion like a loop.
+  - Simple program involving Recursion:
+
+```python
+houses = ["Eric's house", "Kenny's house", "Kyle's house", "Stan's house"]
+
+# Each function call represents a visit to a house
+def visit(houses):
+    # if there is only 1 house
+    if len(houses) == 1:
+        house = houses[0]
+        print("Visiting: ", house)
+
+    # if there is more than 1 house
+    else:
+        # get the mid point within the list of houses
+        mid = len(houses) // 2
+        first_half = houses[:mid]
+        second_half = houses[mid:]
+
+        # recurve to multiple houses at once
+        visit(first_half)
+        visit(second_half)
+```
+
+- Why use recursion within a BST program?
+  - Recursion is a useful tool to let the program solve pretty complex, big problems as a bunch of sub-problems.
+
 ## **Purpose for a Tree in Real World Application**
 
 - BSTs could be used for rendering rendering objects in a 3D game.
@@ -33,9 +66,9 @@
 - Sorting data.
   <br><br>
 
-## Using Trees in Python
+## **Using Trees in Python**
 
-### Operations using within a Python Tree
+### **Operations using within a Python Tree**
 
 - insert()
   - Inserting a value/node into the Tree.
@@ -59,7 +92,7 @@
 
 <hr style='border-width: .5px; padding-top: 10px; padding-bottom: 5px;' />
 
-## Coding Examples
+## **Coding Examples**
 
 ```python
 # Python code to help demonstrate the basics of a Tree
@@ -156,7 +189,7 @@ tree.exists(22)  # Output: False
 tree.exists(25)  # Output: True
 ```
 
-## Problem to Solve
+## **Problem to Solve**
 
 For this problem, we will expand on the Binary Search Tree, written above. The requirements for this problem include:
 
@@ -171,194 +204,7 @@ Be sure to leave relavent, concise comments throughout the code you write. It's 
 Code to start out with (feel free to copy and paste into your own file):
 
 ```python
-# Python code to help demonstrate the usage of a Tree and help improve your knowledge and skills of a Tree.
 
-class BST:
-    # implement the Binary Search Tree data structure.  The Node class below is an inner class to create a node/data object
-
-    class Node:
-        # each node of the BST will have data/data object and pointers to the left and right sub-tree
-
-        def __init__(self, data=None):
-            self.left = None
-            self.right = None
-            self.data = data
-
-    def __init__(self):
-        # initialize an empty BST
-        self.root = None
-
-    def insert(self, data):
-        if self.root is None:
-            # this means that the tree is empty, so just create a node within the tree
-            self.root = BST.Node(data)
-        else:
-            # call a private function to implement the node into the right place within the tree. We use this function recursively.
-            self._insert(data, self.root)
-
-    def _insert(self, data, root):
-        # this method will look for a place to insert a node/data object
-
-        # if data is smaller than root
-        if data < root.data:
-            # if left side of tree is empty, insert a new node there
-            if root.left is None:
-                root.left = BST.Node(data)
-            # if it's not empty, recurse to keep going down the tree
-            else:
-                self._insert(data, root.left)
-        # if data is larger than root
-        else:
-           # if right side of tree is empty, insert a new node there
-            if root.right is None:
-                root.right = BST.Node(data)
-            # if it's not empty, recurse to keep going down the tree
-            else:
-                self._insert(data, root.right)
-
-    def exists(self, data):
-        # this method will search for a node that contains data within the BST
-        # by calling the private class mathod to recurse through the tree
-        return self._exists(data, self.root)  # Start at the root
-
-    def _exists(self, data, root):
-        # this method will search for a node that contains data within the BST
-        # if not found, it will return False or recurse again
-        # if found, it will return True
-        if data < root.data:
-            if root.left is None:
-                print('False')
-                return False
-            else:
-                return self._exists(data, root.left)
-        elif data > root.data:
-            if root.right is None:
-                print('False')
-                return False
-            else:
-                return self._exists(data, root.right)
-        else:
-            print('True')
-            return True
-
-    def delete(self, data):
-        # this method will delete the specificied data out of the tree
-        if self.root is None:
-            return False
-        return self._delete(data, self.root)  # Start at the root
-
-    ##################
-    ### Problem #1 ###
-    ##################
-
-    def _delete(self, data, root):
-        # implement your code here
-        pass
-
-    ##################
-    ##################
-    ##################
-
-    def height(self):
-        # this method is called when wanting to know the tree's height
-        if self.root is None:
-            return False
-        else:
-            return self._height(self.root)  # Start at the root
-
-    ##################
-    ### Problem #2 ###
-    ##################
-
-    def _height(self, root):
-        # implement your code here
-        pass
-
-    ##################
-    ##################
-    ##################
-
-    def get_min(self):
-        # this method will return the smallest node in the ree
-        if self.root is None:
-            return False
-        return self._get_min()
-
-    ##################
-    ### Problem #3 ###
-    ##################
-
-    def _get_min(self, root):
-        # implement your code here
-        pass
-
-    ##################
-    ##################
-    ##################
-
-    def get_max(self):
-        # this method will return the smallest node in the ree
-        if self.root is None:
-            return False
-        return self._get_max()
-
-    ##################
-    ### Problem #4 ###
-    ##################
-
-    def _get_max(self):
-        # implement your code here
-        pass
-
-    ##################
-    ##################
-    ##################
-
-    def __iter__(self):
-        # forward traversal
-        # this method is called when a loop is performed
-        yield from self._traverse_forward(self.root)  # Start at the root
-
-    def _traverse_forward(self, root):
-        # print out data, from smallest to largest
-        if root is not None:
-            yield from self._traverse_forward(root.left)
-            yield root.data
-            yield from self._traverse_forward(root.right)
-
-    def __reversed__(self):
-        # backward traversal
-        # this method is called when a loop is called on reversed() method
-        yield from self._traverse_backward(self.root)  # Start at the root
-
-    ##################
-    ### Problem #5 ###
-    ##################
-
-    def _traverse_backward(self, root):
-        # implement your code here
-        pass
-
-    ##################
-    ##################
-    ##################
-
-
-# create an tree instance
-numbers = [3, 25, 1]
-tree = BST()
-for num in numbers:
-    tree.insert(num)
-for node in tree:
-    print(node)  # Output: 1, 3, 25
-tree.exists(22)  # Output: False
-tree.exists(25)  # Output: True
-
-### Problem #1 ###
-tree.delete(3)
-for node in tree:
-    print(node)  # Output: 1, 3, 25
-print('_______________')
 ```
 
 You can check your answer with the solution here: [Solution](tree-problem.py)
@@ -369,3 +215,4 @@ You can check your answer with the solution here: [Solution](tree-problem.py)
 - https://www.geeksforgeeks.org/binary-search-tree-data-structure/
 - https://dev.to/phuctm97/2-min-codecamp-binary-search-tree-and-real-world-applications-58cj
 - https://www.geeksforgeeks.org/applications-of-bst/
+- https://medium.com/@siddharthgupta555t/finally-understanding-recursion-and-binary-search-trees-857c85e72978#:~:text=It%20looks%20like%20a%20tree,in%20the%20tree%20as%20well.
