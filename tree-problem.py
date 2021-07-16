@@ -81,9 +81,8 @@ class BST:
     def _get_min(self, root):
         # implement your code here
         current = root
-        while current.left is not None:
+        if current.left is not None:
             current = self._get_min(current.left)
-            # current = current.left
         return current
 
     ##################
@@ -102,7 +101,10 @@ class BST:
 
     def _get_max(self, root):
         # implement your code here
-        pass
+        current = root
+        if current.right is not None:
+            current = self._get_max(current.right)
+        return current
 
     ##################
     ##################
@@ -181,17 +183,17 @@ class BST:
 
     def _height(self, root):
         # implement your code here
-        pass
-
-    ##################
-    ##################
-    ##################
-
-    def get_min(self):
-        # this method will return the smallest node in the ree
-        if self.root is None:
+        if root is None:
             return False
-        return self._get_min()
+        else:
+            if self._height(root.left) > self._height(root.right):
+                return self._height(root.left) + 1
+            else:
+                return self._height(root.right) + 1
+
+    ##################
+    ##################
+    ##################
 
     def __iter__(self):
         # forward traversal
@@ -235,6 +237,16 @@ for num in numbers:
 
 ### Problem #1 ###
 tree.delete(1)
+print('')
 for node in tree:
-    print(node)  # Output: 1, 3, 25
-print('_______________')
+    print(node)  # Output: 3, 25
+print('_______________\n')
+minNode = tree.get_min()
+print('Min Value: ', minNode.data)
+print('_______________\n')
+maxNode = tree.get_max()
+print('Max Value: ', maxNode.data)
+print('_______________\n')
+th = tree.height()
+print('Tree Height: ', th)  # Output 2
+print('_______________\n')
