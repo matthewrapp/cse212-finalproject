@@ -52,18 +52,26 @@ class BST:
         # this method will search for a node that contains data within the BST
         # if not found, it will return False or recurse again
         # if found, it will return True
+
+        # if data is less than the root.data (left side)
         if data < root.data:
+            # if the root has no Node on left side, return False
             if root.left is None:
                 print('False')
                 return False
+            # otherwise, recurse with the left root
             else:
                 return self._exists(data, root.left)
+        # if data is greater than the root.data (right side)
         elif data > root.data:
+            # if the root has no Node on right side, return False
             if root.right is None:
                 print('False')
                 return False
+            # otherwise, recurse with the right root
             else:
                 return self._exists(data, root.right)
+        # if data is equal to the root.data
         else:
             print('True')
             return True
@@ -125,22 +133,16 @@ class BST:
     ##################
 
     def _delete(self, data, root):
+        if root is None:
+            return root
         # if data being passed in is less than it's root (left side)
         if data < root.data:
-            # if the left child doesn't exists, return False
-            if root.left is None:
-                return False
-            # otherwise, recurse with the left side
-            else:
-                return self._delete(data, root.left)
+            # set the left side of the root to the recursed return
+            root.left = self._delete(data, root.left)
         # if data being passed in is greater than it's root (right side)
         elif data > root.data:
-            # if the right child doesn't exists, return False
-            if root.right is None:
-                return False
-            # otherwise, recurse with the right side
-            else:
-                return self._delete(data, root.right)
+            # set the right side of the root to the recursed return
+            root.right = self._delete(data, root.right)
         # if data being passed in is equal than it's root
         # this is the node to be deleted
         else:
@@ -163,7 +165,6 @@ class BST:
             # if there is still a left and right child to the node being deleted,
             # take the minimum value in the right subtree and make that the root
             temp = self._get_min(root.right)
-            print(temp.data)
             root.data = temp.data
             # delete the node successor
             root.right = self._delete(temp.data, root.right)
@@ -186,12 +187,15 @@ class BST:
     ##################
 
     def _height(self, root):
-        # implement your code here
+        # if the root is None, nothing in tree, return
         if root is None:
             return False
+        # otherwise, there is at least 1 node in the tree
         else:
+            # if the height of the left side of the root is greater than the height of the right side of the root, return the left side + 1
             if self._height(root.left) > self._height(root.right):
                 return self._height(root.left) + 1
+            # otherwise, return the right side + 1
             else:
                 return self._height(root.right) + 1
 
@@ -237,9 +241,9 @@ class BST:
 # create an tree instance
 numbers = [3, 25, 1, 20]
 tree = BST()
+print('\nNumbers in Tree:')
 for num in numbers:
     tree.insert(num)
-print('')
 for node in tree:
     print(node)  # Output: 1, 3, 20, 25
 print('_______________\n')
@@ -249,18 +253,34 @@ tree.exists(25)  # Output: True
 print('_______________\n')
 
 ### Problem #1 ###
-tree.delete(3)
-for node in tree:
-    print(node)  # Output: 1, 20, 25
-print('_______________\n')
 minNode = tree.get_min()
-print('Min Value: ', minNode.data)
+print('Problem #1, Min Value: ', minNode.data)
 print('_______________\n')
+##################
+
+### Problem #2 ###
 maxNode = tree.get_max()
-print('Max Value: ', maxNode.data)
+print('Problem #2, Max Value: ', maxNode.data)
 print('_______________\n')
+##################
+
+### Problem #3 ###
+print('Problem #3, Values in Tree after deletion: ')
+tree.delete(20)
+for node in tree:
+    print(node)  # Output: 1, 3, 25
+print('_______________\n')
+##################
+
+### Problem #4 ###
 th = tree.height()
-print('Tree Height: ', th)  # Output 2
+print('Problem #4, Tree Height: ', th)  # Output 2
 print('_______________\n')
+##################
+
+### Problem #5 ###
+print('Problem #5, Tree values from largest to smallest: ')  # Output 2
 for node in reversed(tree):
     print(node)  # Output: 25, 20, 1
+print('_______________\n')
+##################
