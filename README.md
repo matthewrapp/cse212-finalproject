@@ -10,10 +10,6 @@ Sections are based in the order above. Each Section will contain an introduction
 
 <hr style='border-width: .5px; padding-top: 10px; padding-bottom: 5px;' />
 
-### Resources
-
-- Resources will be listed here.
-
 ### Contact/Information
 
 - Written & Created by Matthew Rapp.
